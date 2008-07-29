@@ -1,5 +1,5 @@
 +-------------------------------------------------------------------+
-| Flash-Ruby RPC Example                                            |
+| AMQP Flash-Ruby RPC Example                                       |
 | July 29, 2008                                                     |
 |                                                                   |
 | Author: Peter Kieltyka <peter.kieltyka@nulayer.com>               |
@@ -12,18 +12,19 @@ Description
 This project demonstrates the interoperability of Flash and Ruby over
 AMQP by implementing a simple RPC use case.
 
+Messages are transmitted from the client/server using JSON.
+
 
 Usage
 =====================================================================
 
-1. Install AMQP Ruby gem
+1. Install AMQP Ruby and JSON gems
 
-   >> gem install amqp
+   >> gem install amqp json
 
 2. Download and start an AMQ broker (I recommend RabbitMQ) 
 
-   If you are using the RabbitMQ broker you must have Erlang installed
-   on your system.
+   If you are using the RabbitMQ broker you must have Erlang installed on your system.
 
    2a. From the repository:
    
@@ -45,8 +46,9 @@ Usage
 
    >> ruby rpc-serv.rb
 
-4. Compile the RPC-
+4. Start the Flash RPC client
 
+   Open the rpc-client/bin-release/client.html file in a browser and away you go!
 
 
 Other resources
