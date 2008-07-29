@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<objects xmlns="http://www.pranaframework.org/objects"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.pranaframework.org/objects http://www.pranaframework.org/schema/objects/prana-objects-0.6.xsd">
+    
+	<object id="connectionState" class="org.amqp.ConnectionState">
+		<property name="username" value="guest"/>
+		<property name="password" value="guest"/>
+		<property name="vhostpath" value="/"/>
+		<property name="serverhost" value="localhost"/>
+	</object>
+    
+    <object id="connection" class="org.amqp.Connection">
+      <constructor-arg ref="connectionState"/>
+    </object>
+    
+    <object id="serializer" class="JSONSerializer"/>
+    
+    <object id="client" class="org.amqp.patterns.impl.RpcClientImpl">
+      <constructor-arg ref="connection"/>
+      <property name="serializer" ref="serializer"/>
+      <property name="connection" ref="connection"/>
+      <property name="realm" value="/data"/>
+      <property name="exchange" value="rpcx"/>
+      <property name="exchangeType" value="direct"/>
+      <property name="routingKey" value="serv"/>
+    </object>
+    
+</objects>

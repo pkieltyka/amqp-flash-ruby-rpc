@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="connect()">
+
+	<mx:Script>
+		<![CDATA[
+			import JSONSerializer;
+			import MqContext;
+			
+			import org.amqp.patterns.impl.RpcClientImpl;
+			import org.amqp.patterns.CorrelatedMessageEvent;
+			import org.pranaframework.ioc.factory.xml.XMLObjectFactory;
+		
+			private var mq:RpcClientImpl;
+			private var json:JSONSerializer;
+			private var factory:XMLObjectFactory = new XMLObjectFactory();
+			private var ctx:MqContext = new MqContext();
+		
+		
+			private function connect():void {
+				factory.addConfig(ctx.getXML());
+				factory.load();
+				
+				mq = factory.getObject("client");
+			}
+			
+			public function publish():void {
+				var o:* = new Object();
+				o.event = "talk";
+				o.msg = msg.text;
+				
+				mq.send(o, onResponse);
+				
+				msg.text = "";
+			}
+		
+			public function onResponse(event:CorrelatedMessageEvent):void {
+				log.text += event.result.response + "\n";
+				log.validateNow();
+				log.verticalScrollPosition = log.maxVerticalScrollPosition;
+			}
+		]]>
+	</mx:Script>
+	
+	
+	<mx:Panel x="127" y="56" width="484" height="392" layout="absolute" title="Msg Window">
+		<mx:TextArea x="10" y="10" width="444" height="302" id="log"/>
+		<mx:TextInput x="10" y="320" width="381" id="msg" enter="publish()" />
+		<mx:Button x="399" y="320" label="Clear" click="log.text = ''" />
+	</mx:Panel>
+	
+</mx:Application>

@@ -1,0 +1,68 @@
++-------------------------------------------------------------------+
+| Flash-Ruby RPC Example                                            |
+| July 29, 2008                                                     |
+|                                                                   |
+| Author: Peter Kieltyka <peter.kieltyka@nulayer.com>               |
+|                                                                   |
+| Thanks to: Ben Hood and Aman Gupta                                |
++-------------------------------------------------------------------+
+
+Description
+=====================================================================
+This project demonstrates the interoperability of Flash and Ruby over
+AMQP by implementing a simple RPC use case.
+
+
+Usage
+=====================================================================
+
+1. Install AMQP Ruby gem
+
+   >> gem install amqp
+
+2. Download and start an AMQ broker (I recommend RabbitMQ) 
+
+   If you are using the RabbitMQ broker you must have Erlang installed
+   on your system.
+
+   2a. From the repository:
+   
+       >> hg clone http://hg.rabbitmq.com/rabbitmq-codegen
+       >> hg clone http://hg.rabbitmq.com/rabbitmq-server
+       >> cd rabbitmq-server
+       >> make run
+   
+  <OR>
+
+   2b. From a tarball:
+
+       >> wget http://www.rabbitmq.com/releases/rabbitmq-server/v1.4.0/rabbitmq-server-1.4.0.tar.gz
+       >> tar -zxvf rabbitmq-server-1.4.0.tar.gz
+       >> cd rabbitmq-server-1.4.0
+       >> make run
+
+3. Start the Ruby RPC server
+
+   >> ruby rpc-serv.rb
+
+4. Compile the RPC-
+
+
+
+Other resources
+=====================================================================
+
+Ruby AMQP Library
+  http://github.com/tmm1/amqp
+
+AS3 AMQP Library
+  http://github.com/0x6e6562/as3-amqp
+
+RabbitMQ
+  http://www.rabbitmq.com
+
+Ben Hood's blog
+  http://hopper.squarespace.com
+
+AMQP
+  http://www.amqp.org
